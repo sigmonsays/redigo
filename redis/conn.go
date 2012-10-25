@@ -159,9 +159,6 @@ func (c *conn) writeCommand(cmd string, args []interface{}) (err error) {
 }
 
 func (c *conn) readLine() ([]byte, error) {
-    if c.readTimeout != 0 {
-        c.conn.SetReadDeadline(time.Now().Add(c.readTimeout))
-    }
 	p, err := c.br.ReadSlice('\n')
 	if err == bufio.ErrBufferFull {
 		return nil, errors.New("redigo: long response line")
